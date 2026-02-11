@@ -28,6 +28,8 @@ ENV/
 # Database
 *.sqlite
 *.db
+db
+db.bak
 
 # IDE
 .vscode/
@@ -44,7 +46,12 @@ Thumbs.db
 bot_token.txt
 config.json
 *.log
+version
+.python-version
+backups
+captcha_images
 
 # Temporary files
 *.tmp
 tmp/
+log
