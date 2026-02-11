@@ -856,7 +856,7 @@ class ThemeMenuView(discord.ui.View):
         delete_btn.callback = self.delete_theme
         self.add_item(delete_btn)
 
-        # Row 3: Share Online (Coming Soon) - Main Menu
+        # Row 3: Share Online (Coming Soon) - Language - Main Menu
         share_btn = discord.ui.Button(
             label="Share Online (soon)",
             emoji=theme.heartIcon or None,
@@ -867,6 +867,16 @@ class ThemeMenuView(discord.ui.View):
         )
         share_btn.callback = self.share_theme
         self.add_item(share_btn)
+
+        language_btn = discord.ui.Button(
+            label="Language",
+            emoji="🌍",
+            style=discord.ButtonStyle.secondary,
+            custom_id="open_language",
+            row=3
+        )
+        language_btn.callback = self.open_language
+        self.add_item(language_btn)
 
         back_btn = discord.ui.Button(
             label="Main Menu",
@@ -1257,6 +1267,22 @@ class ThemeMenuView(discord.ui.View):
         else:
             await interaction.response.send_message(
                 f"{theme.deniedIcon} Could not return to settings menu.",
+                ephemeral=True
+            )
+
+    async def open_language(self, interaction: discord.Interaction):
+        """Open language selector."""
+        if not await check_interaction_user(interaction, self.original_user_id):
+            return
+
+        # Get the LanguageSwitcher cog
+        language_cog = interaction.client.get_cog("LanguageSwitcher")
+        if language_cog:
+            # Call the language command directly
+            await language_cog.language_command(interaction)
+        else:
+            await interaction.response.send_message(
+                f"{theme.deniedIcon} Language switcher is not available.",
                 ephemeral=True
             )
 
