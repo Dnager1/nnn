@@ -1,0 +1,42 @@
+{
+  "en": {
+    "language_name": "English",
+    "language_flag": "🇬🇧",
+    "language_selector": {
+      "title": "🌍 Language Settings",
+      "description": "Select your preferred language for bot interactions.",
+      "current_language": "Current Language",
+      "select_placeholder": "Choose a language...",
+      "success_title": "✅ Language Updated",
+      "success_description": "Your language preference has been saved to **{language}**."
+    },
+    "common": {
+      "back": "Back",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "settings": "Settings",
+      "save": "Save",
+      "close": "Close"
+    }
+  },
+  "ar": {
+    "language_name": "العربية",
+    "language_flag": "🇸🇦",
+    "language_selector": {
+      "title": "🌍 إعدادات اللغة",
+      "description": "اختر لغتك المفضلة للتفاعل مع البوت.",
+      "current_language": "اللغة الحالية",
+      "select_placeholder": "اختر لغة...",
+      "success_title": "✅ تم تحديث اللغة",
+      "success_description": "تم حفظ تفضيل اللغة الخاص بك إلى **{language}**."
+    },
+    "common": {
+      "back": "رجوع",
+      "cancel": "إلغاء",
+      "confirm": "تأكيد",
+      "settings": "الإعدادات",
+      "save": "حفظ",
+      "close": "إغلاق"
+    }
+  }
+}
