@@ -315,3 +315,4 @@ class LanguageSelect(discord.ui.Select):
 async def setup(bot):
     """Setup function for loading the cog."""
     await bot.add_cog(LanguageSwitcher(bot))
+    logger.info("LanguageSwitcher cog loaded successfully - /language command registered")

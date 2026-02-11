@@ -1150,13 +1150,19 @@ if __name__ == "__main__":
         cogs = ["language_manager", "pimp_my_bot", "olddb", "control", "alliance", "alliance_member_operations", "bot_operations", "logsystem", "support_operations", "gift_operations", "changes", "w", "wel", "other_features", "bear_trap", "bear_trap_schedule", "id_channel", "backup_operations", "bear_trap_editor", "bear_trap_templates", "bear_trap_wizard", "attendance", "attendance_report", "minister_schedule", "minister_menu", "minister_archive", "registration"]
 
         failed_cogs = []
+        loaded_cogs = []
         
         for cog in cogs:
             try:
                 await bot.load_extension(f"cogs.{cog}")
+                loaded_cogs.append(cog)
+                if cog == "language_manager":
+                    print(f"{F.GREEN}✓ Loaded language_manager cog{R}")
             except Exception as e:
                 print(f"✗ Failed to load cog {cog}: {e}")
                 failed_cogs.append(cog)
+        
+        print(f"{F.GREEN}✓ Loaded {len(loaded_cogs)}/{len(cogs)} cogs{R}")
         
         if failed_cogs:
             print(F.RED + f"\n⚠️  {len(failed_cogs)} cog(s) failed to load:" + R)
@@ -1170,7 +1176,14 @@ if __name__ == "__main__":
     async def on_ready():
         try:
             print(f"{F.GREEN}Logged in as {F.CYAN}{bot.user}{R}")
-            await bot.tree.sync()
+            synced = await bot.tree.sync()
+            print(f"{F.GREEN}✓ Synced {len(synced)} slash command(s){R}")
+            # Log language command specifically
+            lang_commands = [cmd for cmd in synced if cmd.name == 'language']
+            if lang_commands:
+                print(f"{F.GREEN}✓ /language command registered successfully{R}")
+            else:
+                print(f"{F.YELLOW}⚠ /language command not found in synced commands{R}")
         except Exception as e:
             print(f"Error syncing commands: {e}")
 
