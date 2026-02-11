@@ -185,7 +185,7 @@ mkdir -p db
 ### Check all components:
 ```bash
 cd /path/to/bot
-python3 /tmp/test_language_system.py
+python3 verify_language_system.py
 ```
 
 ### Verify cog loading:
@@ -194,9 +194,9 @@ cd /path/to/bot
 python3 -c "
 import sys
 sys.path.insert(0, '.')
-from cogs import language_manager
+from cogs.language_manager import language_manager
 print('✓ language_manager can be imported')
-print('Available languages:', list(language_manager.language_manager.translations.keys()))
+print('Available languages:', list(language_manager.translations.keys()))
 "
 ```
 

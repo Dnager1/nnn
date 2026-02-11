@@ -2,6 +2,11 @@
 """
 Language System Startup Verification Script
 Checks all components needed for the language system to work.
+
+Usage:
+    python3 verify_language_system.py [bot_directory]
+    
+    bot_directory: Optional path to bot directory. If not provided, uses current directory.
 """
 
 import os
