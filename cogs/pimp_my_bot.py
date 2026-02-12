@@ -17,7 +17,7 @@ from typing import Tuple
 
 logger = logging.getLogger(__name__)
 from .permission_handler import PermissionManager
-from .language_manager import language_manager
+from .language_manager import language_manager, LanguageSelectorView, AVAILABLE_LANGUAGES
 
 # Database path constant
 THEME_DB_PATH = 'db/pimpmybot.sqlite'
@@ -1301,17 +1301,29 @@ class ThemeMenuView(discord.ui.View):
         """Open language selector."""
         if not await check_interaction_user(interaction, self.original_user_id):
             return
-
-        # Get the LanguageSwitcher cog
-        language_cog = interaction.client.get_cog("LanguageSwitcher")
-        if language_cog:
-            # Call the language command directly
-            await language_cog.language_command(interaction)
-        else:
-            await interaction.response.send_message(
-                f"{theme.deniedIcon} Language switcher is not available.",
-                ephemeral=True
-            )
+        
+        user_id = interaction.user.id
+        current_lang = language_manager.get_user_language(user_id)
+        
+        # Create embed
+        embed = discord.Embed(
+            title=language_manager.get_text('language_selector.title', current_lang),
+            description=language_manager.get_text('language_selector.description', current_lang),
+            color=theme.emColor1
+        )
+        
+        # Add current language field
+        current_lang_name = AVAILABLE_LANGUAGES.get(current_lang, {}).get('name', current_lang)
+        current_lang_flag = AVAILABLE_LANGUAGES.get(current_lang, {}).get('flag', '🌍')
+        embed.add_field(
+            name=language_manager.get_text('language_selector.current_language', current_lang),
+            value=f"{current_lang_flag} {current_lang_name}",
+            inline=False
+        )
+        
+        # Create view with language selector
+        view = LanguageSelectorView(language_manager, current_lang)
+        await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
 class PageModal(discord.ui.Modal):
     def __init__(self, view, original_user_id):

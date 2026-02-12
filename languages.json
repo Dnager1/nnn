@@ -11,7 +11,7 @@
       "success_description": "Your language preference has been saved to **{language}**."
     },
     "settings_menu": {
-      "title": "Settings Menu",
+      "title": "⚙️ Settings Menu",
       "description": "Please select a category:",
       "menu_categories": "Menu Categories",
       "alliance_operations": "Alliance Operations",
@@ -32,7 +32,7 @@
       "other_features_desc": "Additional bot features"
     },
     "theme_settings": {
-      "title": "Theme Settings",
+      "title": "🎨 Theme Settings",
       "description": "Customize your bot's appearance with themes!",
       "info_line1": "- Custom themes can be created, edited, and shared.",
       "info_line2": "- Each theme consists of icons, dividers, and colors.",
@@ -95,7 +95,9 @@
       "close": "Close",
       "success": "Success",
       "error": "Error",
-      "loading": "Loading..."
+      "loading": "Loading...",
+      "yes": "Yes",
+      "no": "No"
     }
   },
   "ar": {
@@ -110,7 +112,7 @@
       "success_description": "تم حفظ تفضيل اللغة الخاص بك إلى **{language}**."
     },
     "settings_menu": {
-      "title": "قائمة الإعدادات",
+      "title": "⚙️ قائمة الإعدادات",
       "description": "الرجاء اختيار فئة:",
       "menu_categories": "فئات القائمة",
       "alliance_operations": "عمليات التحالف",
@@ -131,7 +133,7 @@
       "other_features_desc": "ميزات إضافية للبوت"
     },
     "theme_settings": {
-      "title": "إعدادات المظهر",
+      "title": "🎨 إعدادات المظهر",
       "description": "خصص مظهر البوت الخاص بك بالسمات!",
       "info_line1": "- يمكن إنشاء وتحرير ومشاركة السمات المخصصة.",
       "info_line2": "- تتكون كل سمة من أيقونات وفواصل وألوان.",
@@ -194,7 +196,9 @@
       "close": "إغلاق",
       "success": "نجاح",
       "error": "خطأ",
-      "loading": "جاري التحميل..."
+      "loading": "جاري التحميل...",
+      "yes": "نعم",
+      "no": "لا"
     }
   }
 }
