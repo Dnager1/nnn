@@ -210,6 +210,26 @@ class LanguageManager:
 language_manager = LanguageManager()
 
 
+def get_user_text(user_id: int, key: str, **kwargs) -> str:
+    """
+    Helper function to get translated text based on user's language preference.
+    
+    Args:
+        user_id: User's Discord ID
+        key: Translation key in dot notation (e.g., 'settings_menu.title')
+        **kwargs: Optional format parameters for the translation string
+    
+    Returns:
+        Translated and formatted text
+    
+    Example:
+        >>> title = get_user_text(12345, 'settings_menu.title')
+        >>> desc = get_user_text(12345, 'settings_menu.description')
+    """
+    user_lang = language_manager.get_user_language(user_id)
+    return language_manager.get_text(key, user_lang, **kwargs)
+
+
 class LanguageSwitcher(commands.Cog):
     """Cog for language switching functionality."""
     

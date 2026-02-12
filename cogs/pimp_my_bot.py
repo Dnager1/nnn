@@ -17,6 +17,7 @@ from typing import Tuple
 
 logger = logging.getLogger(__name__)
 from .permission_handler import PermissionManager
+from .language_manager import language_manager
 
 # Database path constant
 THEME_DB_PATH = 'db/pimpmybot.sqlite'
@@ -681,51 +682,77 @@ class ThemeMenuView(discord.ui.View):
         themes = self._get_theme_list()
         global_active = self._get_global_active_theme()
         server_theme = self._get_server_theme()
+        
+        # Get user's language preference
+        user_lang = language_manager.get_user_language(self.original_user_id)
 
         embed = discord.Embed(
-            title=f"{theme.paletteIcon} Theme Settings",
+            title=f"{theme.paletteIcon} {language_manager.get_text('theme_settings.title', user_lang)}",
             description=(
                 f"{theme.upperDivider}\n"
-                f"Customize your bot's appearance with themes!\n"
-                f"- Custom themes can be created, edited, and shared.\n"
-                f"- Each theme consists of icons, dividers, and colors.\n"
-                f"- Each server can use a different theme, or the global default.\n"
-                f"- Any theme can be set as the global default.\n"
-                f"- The original default theme can be edited but not deleted.\n"
+                f"{language_manager.get_text('theme_settings.description', user_lang)}\n"
+                f"{language_manager.get_text('theme_settings.info_line1', user_lang)}\n"
+                f"{language_manager.get_text('theme_settings.info_line2', user_lang)}\n"
+                f"{language_manager.get_text('theme_settings.info_line3', user_lang)}\n"
+                f"{language_manager.get_text('theme_settings.info_line4', user_lang)}\n"
+                f"{language_manager.get_text('theme_settings.info_line5', user_lang)}\n"
                 f"{theme.lowerDivider}"
             ),
             color=theme.emColor1
         )
 
         # Status info
-        embed.add_field(name="Global Active", value=global_active, inline=True)
+        embed.add_field(
+            name=language_manager.get_text('theme_settings.global_active', user_lang),
+            value=global_active,
+            inline=True
+        )
 
         if server_theme:
-            embed.add_field(name="This Server", value=f"{server_theme} {theme.checkIcon}", inline=True)
+            embed.add_field(
+                name=language_manager.get_text('theme_settings.this_server', user_lang),
+                value=f"{server_theme} {theme.checkIcon}",
+                inline=True
+            )
         else:
-            embed.add_field(name="This Server", value=f"(using global)", inline=True)
+            embed.add_field(
+                name=language_manager.get_text('theme_settings.this_server', user_lang),
+                value=language_manager.get_text('theme_settings.using_global', user_lang),
+                inline=True
+            )
 
-        embed.add_field(name="Total Themes", value=str(len(themes)), inline=True)
+        embed.add_field(
+            name=language_manager.get_text('theme_settings.total_themes', user_lang),
+            value=str(len(themes)),
+            inline=True
+        )
 
         # Help info
         help_text = (
-            f"{theme.addIcon} **Create** - Make a new theme\n"
-            f"{theme.editListIcon} **Edit** - Customize the currently selected theme\n"
-            f"{theme.importIcon} **Import** / {theme.exportIcon} **Export** - JSON import/export\n"
-            f"{theme.starIcon} **Set Default** - Global default (global admin only)\n"
-            f"{theme.checkIcon} **Apply to Server** - Apply selected theme to this server\n"
-            f"{theme.globeIcon} **Revert to Global** - Revert to using the global default theme\n"
-            f"{theme.trashIcon} **Delete** - Remove the selected theme (cannot be undone)\n"
-            f"{theme.heartIcon} **Share Online** - Share your theme with others online (custom themes only)\n"
+            f"{theme.addIcon} **{language_manager.get_text('theme_settings.create', user_lang)}** - {language_manager.get_text('theme_settings.create_desc', user_lang)}\n"
+            f"{theme.editListIcon} **{language_manager.get_text('theme_settings.edit', user_lang)}** - {language_manager.get_text('theme_settings.edit_desc', user_lang)}\n"
+            f"{theme.importIcon} **{language_manager.get_text('theme_settings.import', user_lang)}** / {theme.exportIcon} **{language_manager.get_text('theme_settings.export', user_lang)}** - {language_manager.get_text('theme_settings.import_export_desc', user_lang)}\n"
+            f"{theme.starIcon} **{language_manager.get_text('theme_settings.set_default', user_lang)}** - {language_manager.get_text('theme_settings.set_default_desc', user_lang)}\n"
+            f"{theme.checkIcon} **{language_manager.get_text('theme_settings.apply_to_server', user_lang)}** - {language_manager.get_text('theme_settings.apply_to_server_desc', user_lang)}\n"
+            f"{theme.globeIcon} **{language_manager.get_text('theme_settings.revert_to_global', user_lang)}** - {language_manager.get_text('theme_settings.revert_to_global_desc', user_lang)}\n"
+            f"{theme.trashIcon} **{language_manager.get_text('theme_settings.delete', user_lang)}** - {language_manager.get_text('theme_settings.delete_desc', user_lang)}\n"
+            f"{theme.heartIcon} **{language_manager.get_text('theme_settings.share_online', user_lang)}** - {language_manager.get_text('theme_settings.share_online_desc', user_lang)}\n"
         )
-        embed.add_field(name="Quick Guide", value=help_text, inline=False)
-        embed.set_footer(text="Seeing ghosts? The bot must have access to your theme's custom emojis. Try re-importing or check server emoji access.")
+        embed.add_field(
+            name=language_manager.get_text('theme_settings.quick_guide', user_lang),
+            value=help_text,
+            inline=False
+        )
+        embed.set_footer(text=language_manager.get_text('theme_settings.footer', user_lang))
 
         return embed
 
     def _build_components(self):
         """Build the view's components."""
         self.clear_items()
+        
+        # Get user's language preference
+        user_lang = language_manager.get_user_language(self.original_user_id)
 
         # Theme dropdown
         themes = self._get_theme_list()
@@ -769,7 +796,7 @@ class ThemeMenuView(discord.ui.View):
 
         # Row 1: Create - Edit - Import - Export
         create_btn = discord.ui.Button(
-            label="Create",
+            label=language_manager.get_text('theme_settings.create', user_lang),
             emoji=theme.addIcon or None,
             style=discord.ButtonStyle.success,
             custom_id="create_theme",
@@ -779,7 +806,7 @@ class ThemeMenuView(discord.ui.View):
         self.add_item(create_btn)
 
         edit_btn = discord.ui.Button(
-            label="Edit",
+            label=language_manager.get_text('theme_settings.edit', user_lang),
             emoji=theme.editListIcon or None,
             style=discord.ButtonStyle.primary,
             custom_id="edit_theme",
@@ -790,7 +817,7 @@ class ThemeMenuView(discord.ui.View):
         self.add_item(edit_btn)
 
         import_btn = discord.ui.Button(
-            label="Import",
+            label=language_manager.get_text('theme_settings.import', user_lang),
             emoji=theme.importIcon or None,
             style=discord.ButtonStyle.secondary,
             custom_id="import_theme",
@@ -800,7 +827,7 @@ class ThemeMenuView(discord.ui.View):
         self.add_item(import_btn)
 
         export_btn = discord.ui.Button(
-            label="Export",
+            label=language_manager.get_text('theme_settings.export', user_lang),
             emoji=theme.exportIcon or None,
             style=discord.ButtonStyle.secondary,
             custom_id="export_theme",
@@ -813,7 +840,7 @@ class ThemeMenuView(discord.ui.View):
         # Row 2: Set Default - Set for Server - Delete
         if self.is_global_admin:
             set_default_btn = discord.ui.Button(
-                label="Set Default",
+                label=language_manager.get_text('theme_settings.set_default', user_lang),
                 emoji=theme.starIcon or None,
                 style=discord.ButtonStyle.primary,
                 custom_id="activate_theme",
@@ -826,7 +853,7 @@ class ThemeMenuView(discord.ui.View):
         # Toggle button: if server has override for selected theme, show "Revert to Global" to clear it
         if is_server_active:
             revert_global_btn = discord.ui.Button(
-                label="Revert to Global",
+                label=language_manager.get_text('theme_settings.revert_to_global', user_lang),
                 emoji=theme.globeIcon or None,
                 style=discord.ButtonStyle.secondary,
                 custom_id="clear_server_theme",
@@ -836,7 +863,7 @@ class ThemeMenuView(discord.ui.View):
             self.add_item(revert_global_btn)
         else:
             set_server_btn = discord.ui.Button(
-                label="Apply to Server",
+                label=language_manager.get_text('theme_settings.apply_to_server', user_lang),
                 emoji=theme.checkIcon or None,
                 style=discord.ButtonStyle.primary,
                 custom_id="set_server_theme",
@@ -846,7 +873,7 @@ class ThemeMenuView(discord.ui.View):
             self.add_item(set_server_btn)
 
         delete_btn = discord.ui.Button(
-            label="Delete",
+            label=language_manager.get_text('theme_settings.delete', user_lang),
             emoji=theme.trashIcon or None,
             style=discord.ButtonStyle.danger,
             custom_id="delete_theme",
@@ -858,7 +885,7 @@ class ThemeMenuView(discord.ui.View):
 
         # Row 3: Share Online (Coming Soon) - Language - Main Menu
         share_btn = discord.ui.Button(
-            label="Share Online (soon)",
+            label=f"{language_manager.get_text('theme_settings.share_online', user_lang)} (soon)",
             emoji=theme.heartIcon or None,
             style=discord.ButtonStyle.secondary,
             custom_id="share_theme",
@@ -869,7 +896,7 @@ class ThemeMenuView(discord.ui.View):
         self.add_item(share_btn)
 
         language_btn = discord.ui.Button(
-            label="Language",
+            label=language_manager.get_text('theme_settings.language', user_lang),
             emoji="🌍",
             style=discord.ButtonStyle.secondary,
             custom_id="open_language",
@@ -879,7 +906,7 @@ class ThemeMenuView(discord.ui.View):
         self.add_item(language_btn)
 
         back_btn = discord.ui.Button(
-            label="Main Menu",
+            label=language_manager.get_text('theme_settings.main_menu', user_lang),
             emoji=theme.homeIcon or None,
             style=discord.ButtonStyle.secondary,
             custom_id="back_to_settings",
