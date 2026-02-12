@@ -3,6 +3,7 @@ import sys
 import os
 import shutil
 import stat
+import json
 
 # Python version check
 MIN_PYTHON = (3, 11)
@@ -650,6 +651,38 @@ R = Style.RESET_ALL
 import warnings
 import aiohttp
 
+def verify_language_system():
+    """
+    Automatic language system verification on startup.
+    Performs essential checks from LANGUAGE_ACTIVATION_GUIDE.md
+    """
+    try:
+        # Check 1: languages.json exists and is valid
+        if not os.path.exists('languages.json'):
+            print(f"{F.YELLOW}⚠ languages.json not found - language system may not work{R}")
+            return False
+        
+        with open('languages.json', 'r', encoding='utf-8') as f:
+            langs = json.load(f)
+        
+        if 'en' not in langs or 'ar' not in langs:
+            print(f"{F.YELLOW}⚠ Missing required languages in languages.json{R}")
+            return False
+        
+        # Check 2: language_manager.py exists
+        if not os.path.exists('cogs/language_manager.py'):
+            print(f"{F.YELLOW}⚠ cogs/language_manager.py not found{R}")
+            return False
+        
+        # Check 3: Database directory
+        os.makedirs('db', exist_ok=True)
+        
+        print(f"{F.GREEN}✓ Language system verified and ready{R}")
+        return True
+    except Exception as e:
+        print(f"{F.YELLOW}⚠ Language system verification failed: {e}{R}")
+        return False
+
 def check_vcredist():
     """Check if Visual C++ Redistributable is installed on Windows."""
     if sys.platform != "win32":
@@ -1145,6 +1178,9 @@ if __name__ == "__main__":
         print(F.GREEN + "All tables checked." + R)
 
     create_tables()
+
+    # Auto-activate language system on startup
+    verify_language_system()
 
     async def load_cogs():
         cogs = ["language_manager", "pimp_my_bot", "olddb", "control", "alliance", "alliance_member_operations", "bot_operations", "logsystem", "support_operations", "gift_operations", "changes", "w", "wel", "other_features", "bear_trap", "bear_trap_schedule", "id_channel", "backup_operations", "bear_trap_editor", "bear_trap_templates", "bear_trap_wizard", "attendance", "attendance_report", "minister_schedule", "minister_menu", "minister_archive", "registration"]

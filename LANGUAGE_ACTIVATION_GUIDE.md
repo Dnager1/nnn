@@ -3,27 +3,18 @@
 
 ## Quick Start (English)
 
-The language system is **already fully implemented** in the bot. Follow these steps to activate and test it:
+The language system is **already fully implemented** and **automatically activated** in the bot. Just start the bot to use it!
 
-### Step 1: Verify Installation ✅
-
-Run the verification script to check everything is configured:
-
-```bash
-cd /path/to/bot-main
-python3 verify_language_system.py
-```
-
-You should see: `✅ All critical checks passed!`
-
-### Step 2: Start the Bot 🚀
+### Step 1: Start the Bot 🚀
 
 ```bash
 python main.py
 ```
 
-**Look for these messages in the logs:**
+**The language system is now automatically verified on startup!** Look for these messages in the logs:
+
 ```
+✓ Language system verified and ready
 ✓ Loaded language_manager cog
 ✓ Loaded 27/27 cogs
 Logged in as YourBotName
@@ -33,7 +24,7 @@ Logged in as YourBotName
 
 ✅ If you see all these messages, the language system is active!
 
-### Step 3: Test in Discord 🎮
+### Step 2: Test in Discord 🎮
 
 **Method 1: Using /language command**
 1. In any Discord channel, type `/language`
@@ -50,38 +41,31 @@ Logged in as YourBotName
 4. Choose your language from the dropdown
 5. You'll see a success message
 
-### Step 4: Verify It Works 🎉
+### Step 3: Verify It Works 🎉
 
 After selecting a language:
 - Use `/language` again - it should show your selected language
 - The interface should display in your chosen language
 - Your preference is saved to the database
 
+> **📝 Note:** The language system is now automatically verified on startup. If you want to run manual verification for troubleshooting, you can still use: `python3 verify_language_system.py`
+
 ---
 
 ## البدء السريع (عربي)
 
-نظام اللغة **مطبق بالكامل بالفعل** في البوت. اتبع هذه الخطوات لتفعيله واختباره:
+نظام اللغة **مطبق بالكامل بالفعل** و**يتم تفعيله تلقائياً** في البوت. فقط ابدأ البوت لاستخدامه!
 
-### الخطوة 1: التحقق من التثبيت ✅
-
-قم بتشغيل سكريبت التحقق للتأكد من أن كل شيء مهيأ:
-
-```bash
-cd /path/to/bot-main
-python3 verify_language_system.py
-```
-
-يجب أن ترى: `✅ All critical checks passed!`
-
-### الخطوة 2: تشغيل البوت 🚀
+### الخطوة 1: تشغيل البوت 🚀
 
 ```bash
 python main.py
 ```
 
-**ابحث عن هذه الرسائل في السجلات:**
+**يتم الآن التحقق من نظام اللغة تلقائياً عند بدء التشغيل!** ابحث عن هذه الرسائل في السجلات:
+
 ```
+✓ Language system verified and ready
 ✓ Loaded language_manager cog
 ✓ Loaded 27/27 cogs
 Logged in as YourBotName
@@ -91,7 +75,7 @@ Logged in as YourBotName
 
 ✅ إذا رأيت كل هذه الرسائل، فنظام اللغة نشط!
 
-### الخطوة 3: اختبر في Discord 🎮
+### الخطوة 2: اختبر في Discord 🎮
 
 **الطريقة 1: استخدام أمر /language**
 1. في أي قناة Discord، اكتب `/language`
@@ -108,12 +92,14 @@ Logged in as YourBotName
 4. اختر لغتك من القائمة المنسدلة
 5. سترى رسالة نجاح
 
-### الخطوة 4: تحقق من أنه يعمل 🎉
+### الخطوة 3: تحقق من أنه يعمل 🎉
 
 بعد اختيار لغة:
 - استخدم `/language` مرة أخرى - يجب أن يعرض لغتك المختارة
 - يجب أن تظهر الواجهة بلغتك المختارة
 - تفضيلك محفوظ في قاعدة البيانات
+
+> **📝 ملاحظة:** يتم الآن التحقق من نظام اللغة تلقائياً عند بدء التشغيل. إذا كنت تريد إجراء التحقق اليدوي لاستكشاف الأخطاء، يمكنك استخدام: `python3 verify_language_system.py`
 
 ---
 
@@ -289,8 +275,8 @@ Need help? / تحتاج مساعدة؟
 
 ✅ **Language system is ready!** / نظام اللغة جاهز!
 
-The language feature is **fully implemented and activated**. Just start your bot and use `/language` command or the Language button in Theme Settings.
+The language feature is **fully implemented and automatically activated**. The system verifies itself on startup - just start your bot and use `/language` command or the Language button in Theme Settings.
 
-ميزة اللغة **منفذة ومفعلة بالكامل**. فقط ابدأ البوت الخاص بك واستخدم أمر `/language` أو زر اللغة في إعدادات المظهر.
+ميزة اللغة **منفذة ومفعلة تلقائياً بالكامل**. يتحقق النظام من نفسه عند بدء التشغيل - فقط ابدأ البوت الخاص بك واستخدم أمر `/language` أو زر اللغة في إعدادات المظهر.
 
 🎉 Enjoy the bot in your preferred language! / استمتع بالبوت بلغتك المفضلة!
