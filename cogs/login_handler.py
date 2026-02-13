@@ -8,6 +8,7 @@ from datetime import datetime
 from typing import Optional, List, Dict, Callable
 
 from .pimp_my_bot import theme
+from config import Config
 
 class LoginHandler:
     """
@@ -32,7 +33,7 @@ class LoginHandler:
         # API Configuration for login/player check
         self.api1_url = 'https://wos-giftcode-api.centurygame.com/api/player'
         self.api2_url = 'https://gof-report-api-formal.centurygame.com/api/player'
-        self.secret = 'tB87#kPtkxqOS2'
+        self.secret = Config.WOS_API_SECRET
         
         # Rate limiting for login operations
         self.api1_requests = []  # Timestamps of API1 requests

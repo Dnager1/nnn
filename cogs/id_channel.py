@@ -11,8 +11,9 @@ import ssl
 from discord.ext import tasks
 from .permission_handler import PermissionManager
 from .pimp_my_bot import theme
+from config import Config
 
-SECRET = "tB87#kPtkxqOS2"
+SECRET = Config.WOS_API_SECRET
 
 class IDChannel(commands.Cog):
     def __init__(self, bot):

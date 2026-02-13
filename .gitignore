@@ -51,6 +51,18 @@ version
 backups
 captcha_images
 
+# Environment Variables
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Secrets
+secrets/
+*.key
+*.pem
+*.p12
+
 # Temporary files
 *.tmp
 tmp/
