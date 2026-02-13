@@ -7,6 +7,7 @@ import time
 import ssl
 from .permission_handler import PermissionManager
 from .pimp_my_bot import theme
+from config import Config
 
 class RegisterSettingsView(discord.ui.View):
     def __init__(self, cog):
@@ -137,7 +138,7 @@ class Register(commands.Cog):
         session = aiohttp.ClientSession()
         
         data_nosign = f"fid={fid}&time={time.time_ns()}"
-        sign = hashlib.md5((data_nosign + "tB87#kPtkxqOS2").encode()).hexdigest()
+        sign = hashlib.md5((data_nosign + Config.WOS_API_SECRET).encode()).hexdigest()
         data = f"sign={sign}&{data_nosign}"
 
         try:

@@ -24,6 +24,7 @@ from .gift_operationsapi import GiftCodeAPI
 from .gift_captchasolver import GiftCaptchaSolver
 from collections import deque
 from .pimp_my_bot import theme
+from config import Config
 
 class GiftOperations(commands.Cog):
     def __init__(self, bot):
@@ -139,7 +140,7 @@ class GiftOperations(commands.Cog):
         self.wos_giftcode_url = "https://wos-giftcode-api.centurygame.com/api/gift_code"
         self.wos_captcha_url = "https://wos-giftcode-api.centurygame.com/api/captcha"
         self.wos_giftcode_redemption_url = "https://wos-giftcode.centurygame.com"
-        self.wos_encrypt_key = "tB87#kPtkxqOS2"
+        self.wos_encrypt_key = Config.WOS_API_SECRET
 
         # Retry Configuration for Requests
         self.retry_config = Retry(

@@ -11,6 +11,7 @@ import re
 from datetime import datetime
 import json
 from .pimp_my_bot import theme
+from config import Config
 
 try:
     import arabic_reshaper
@@ -19,7 +20,7 @@ try:
 except ImportError:
     ARABIC_SUPPORT = False
 
-SECRET = 'tB87#kPtkxqOS2'
+SECRET = Config.WOS_API_SECRET
 
 class ChannelSelectView(discord.ui.View):
     def __init__(self, bot, context: str):

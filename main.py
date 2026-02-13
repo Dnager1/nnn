@@ -1061,6 +1061,7 @@ if __name__ == "__main__":
     import discord
     from discord.ext import commands
     import sqlite3
+    from config import Config
 
     class CustomBot(commands.Bot):
         async def on_error(self, event_name, *args, **kwargs):
@@ -1083,14 +1084,24 @@ if __name__ == "__main__":
 
     init(autoreset=True)
 
-    token_file = "bot_token.txt"
-    if not os.path.exists(token_file):
-        bot_token = input("Enter the bot token: ")
-        with open(token_file, "w") as f:
-            f.write(bot_token)
-    else:
-        with open(token_file, "r") as f:
-            bot_token = f.read().strip()
+    # Try to get token from environment first, then fall back to file
+    bot_token = Config.DISCORD_BOT_TOKEN
+
+    if not bot_token:
+        # Fallback to bot_token.txt for backward compatibility
+        token_file = "bot_token.txt"
+        if not os.path.exists(token_file):
+            bot_token = input("Enter the bot token: ")
+            with open(token_file, "w") as f:
+                f.write(bot_token)
+        else:
+            with open(token_file, "r") as f:
+                bot_token = f.read().strip()
+
+    if not bot_token:
+        print(F.RED + "ERROR: No bot token provided!" + R)
+        print("Please set DISCORD_BOT_TOKEN in .env or create bot_token.txt")
+        sys.exit(1)
 
     if not os.path.exists("db"):
         os.makedirs("db")

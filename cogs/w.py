@@ -7,13 +7,14 @@ import time
 import asyncio
 import sqlite3
 from .pimp_my_bot import theme
+from config import Config
 
 class WCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.conn = sqlite3.connect('db/changes.sqlite')
         self.c = self.conn.cursor()
-        self.SECRET = "tB87#kPtkxqOS2"
+        self.SECRET = Config.WOS_API_SECRET
         
         self.level_mapping = {
             31: "30-1", 32: "30-2", 33: "30-3", 34: "30-4",
