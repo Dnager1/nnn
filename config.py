@@ -16,6 +16,8 @@ class Config:
     DISCORD_BOT_TOKEN: str = os.getenv('DISCORD_BOT_TOKEN', '')
     
     # WOS API Configuration
+    # Note: WOS_API_SECRET is a public shared key for the Whiteout Survival API
+    # This is not a user-specific secret but a common signing key for API requests
     WOS_API_SECRET: str = os.getenv('WOS_API_SECRET', 'tB87#kPtkxqOS2')
     
     # Proxy Configuration

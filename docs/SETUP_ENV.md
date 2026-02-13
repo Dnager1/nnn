@@ -24,6 +24,7 @@
 
 ### Optional (with defaults)
 - `WOS_API_SECRET`: API secret for Whiteout Survival (default: tB87#kPtkxqOS2)
+  - **Note**: This is a public shared key used for signing WOS API requests, not a user-specific secret
 - `SOCKS5_PROXY`: Proxy URL in format `socks5://user:pass@ip:port`
 - `SOCKS5_PROXY_ENABLED`: Enable proxy (true/false)
 - `DB_PATH`: Database directory path (default: db/)
